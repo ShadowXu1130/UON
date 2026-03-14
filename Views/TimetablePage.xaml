@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UON.Views.TimetablePage"
+             BackgroundColor="Black"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto,*">
+
+
+        <!-- Header -->
+        <Grid Padding="20,20,20,10"
+            ColumnDefinitions="60,*,60"
+            VerticalOptions="Start">
+
+            <Label Grid.Column="0"
+                Text="&lt;"
+                TextColor="White"
+                FontSize="22"
+                HorizontalOptions="Start"
+                VerticalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnPreviousWeekTapped" />
+                </Label.GestureRecognizers>
+            </Label>
+
+            <VerticalStackLayout Grid.Column="1"
+                                Spacing="4"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center">
+
+                <Border BackgroundColor="#111217"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 10"
+                        WidthRequest="200"
+                        HeightRequest="48"
+                        HorizontalOptions="Center">
+
+                    <Grid>
+                        <Picker x:Name="WeekPicker"
+                                Opacity="0.02"
+                                Title="Select Week"
+                                TitleColor="Transparent"
+                                TextColor="Transparent"
+                                BackgroundColor="Transparent"
+                                HorizontalOptions="Fill"
+                                VerticalOptions="Fill"
+                                SelectedIndexChanged="OnWeekChanged" />
+
+                        <Label x:Name="WeekDisplayLabel"
+                            InputTransparent="True"
+                            Text="Week 7"
+                            TextColor="White"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            HorizontalTextAlignment="Center"
+                            VerticalTextAlignment="Center" />
+                    </Grid>
+                </Border>
+
+                <Label x:Name="WeekRangeLabel"
+                    Text="Mar 2 - Mar 8"
+                    TextColor="#8E8E93"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    FontSize="14" />
+            </VerticalStackLayout>
+
+            <Label Grid.Column="2"
+                Text="&gt;"
+                TextColor="White"
+                FontSize="22"
+                HorizontalOptions="End"
+                VerticalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnNextWeekTapped" />
+                </Label.GestureRecognizers>
+            </Label>
+        </Grid>
+
+
+        <!-- Timetable -->
+        <ScrollView Grid.Row="1" Orientation="Both">
+            <Grid x:Name="TimetableGrid"
+                  Padding="12"
+                  ColumnSpacing="4"
+                  RowSpacing="2"
+                  ColumnDefinitions="70,120,120,120,120,120,120,120"
+                  RowDefinitions="46,
+                                  30,30,30,30,30,30,30,30,30,30,
+                                  30,30,30,30,30,30,30,30,30,30,
+                                  30,30">
+
+                <!-- Background -->
+                <BoxView Grid.Row="1"
+                         Grid.Column="1"
+                         Grid.RowSpan="22"
+                         Grid.ColumnSpan="7"
+                         Color="#111217" />
+
+                <!-- Day headers -->
+                <Label x:Name="Day1Label"
+                       Grid.Row="0"
+                       Grid.Column="1"
+                       Text="MON&#10;Mar 2"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       TextColor="#7C7C84"
+                       FontSize="12"
+                       FontAttributes="Bold" />
+
+                <Label x:Name="Day2Label"
+                       Grid.Row="0"
+                       Grid.Column="2"
+                       Text="TUE&#10;Mar 3"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       TextColor="#7C7C84"
+                       FontSize="12"
+                       FontAttributes="Bold" />
+
+                <Label x:Name="Day3Label"
+                       Grid.Row="0"
+                       Grid.Column="3"
+                       Text="WED&#10;Mar 4"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       TextColor="#7C7C84"
+                       FontSize="12"
+                       FontAttributes="Bold" />
+
+                <Label x:Name="Day4Label"
+                       Grid.Row="0"
+                       Grid.Column="4"
+                       Text="THU&#10;Mar 5"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       TextColor="#7C7C84"
+                       FontSize="12"
+                       FontAttributes="Bold" />
+
+                <Label x:Name="Day5Label"
+                       Grid.Row="0"
+                       Grid.Column="5"
+                       Text="FRI&#10;Mar 6"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       TextColor="#7C7C84"
+                       FontSize="12"
+                       FontAttributes="Bold" />
+
+                <Label x:Name="Day6Label"
+                       Grid.Row="0"
+                       Grid.Column="6"
+                       Text="SAT&#10;Mar 7"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       TextColor="#7C7C84"
+                       FontSize="12"
+                       FontAttributes="Bold" />
+
+                <Label x:Name="Day7Label"
+                       Grid.Row="0"
+                       Grid.Column="7"
+                       Text="SUN&#10;Mar 8"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       TextColor="#7C7C84"
+                       FontSize="12"
+                       FontAttributes="Bold" />
+
+                <!-- Time labels: 30分钟网格，但只显示整点 -->
+                <Label Grid.Row="1"  Text="08:00" TextColor="#666666" FontSize="12" VerticalOptions="Start" Margin="0,-6,0,0" />
+                <Label Grid.Row="3"  Text="09:00" TextColor="#666666" FontSize="12" VerticalOptions="Start" Margin="0,-6,0,0" />
+                <Label Grid.Row="5"  Text="10:00" TextColor="#666666" FontSize="12" VerticalOptions="Start" Margin="0,-6,0,0" />
+                <Label Grid.Row="7"  Text="11:00" TextColor="#666666" FontSize="12" VerticalOptions="Start" Margin="0,-6,0,0" />
+                <Label Grid.Row="9"  Text="12:00" TextColor="#666666" FontSize="12" VerticalOptions="Start" Margin="0,-6,0,0" />
+                <Label Grid.Row="11" Text="13:00" TextColor="#666666" FontSize="12" VerticalOptions="Start" Margin="0,-6,0,0" />
+                <Label Grid.Row="13" Text="14:00" TextColor="#666666" FontSize="12" VerticalOptions="Start" Margin="0,-6,0,0" />
+                <Label Grid.Row="15" Text="15:00" TextColor="#666666" FontSize="12" VerticalOptions="Start" Margin="0,-6,0,0" />
+                <Label Grid.Row="17" Text="16:00" TextColor="#666666" FontSize="12" VerticalOptions="Start" Margin="0,-6,0,0" />
+                <Label Grid.Row="19" Text="17:00" TextColor="#666666" FontSize="12" VerticalOptions="Start" Margin="0,-6,0,0" />
+                <Label Grid.Row="21" Text="18:00" TextColor="#666666" FontSize="12" VerticalOptions="Start" Margin="0,-6,0,0" />
+
+            </Grid>
+        </ScrollView>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="UON.Views.HomePage"
+             BackgroundColor="#000000"
+             Shell.NavBarIsVisible="False">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="28,36,28,28" Spacing="22">
+
+            <!-- Header -->
+            <Grid ColumnDefinitions="*,Auto" VerticalOptions="Start">
+                <VerticalStackLayout Spacing="2">
+                    <Label x:Name="GreetingLabel"
+                           Text="Good Afternoon"
+                           FontSize="44"
+                           FontAttributes="Bold"
+                           TextColor="White"
+                           LineBreakMode="NoWrap" />
+
+                    <Label x:Name="DateLabel"
+                           Text="Today is Friday, Jan 30"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="#8D8D95" />
+                </VerticalStackLayout>
+
+                <Label Grid.Column="1"
+                       Text="⚙"
+                       FontSize="40"
+                       Margin="0,14,0,0"
+                       TextColor="#B8B8BD"
+                       VerticalOptions="Start">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSettingsTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+
+            <!-- Profile Card -->
+            <Border BackgroundColor="#7A8898"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 28"
+                    Padding="24,22">
+                <VerticalStackLayout Spacing="18">
+                    <Label Text="The University of Newcastle"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="White" />
+
+                    <Label Text="Xinpeng Xu"
+                           FontSize="42"
+                           FontAttributes="Bold"
+                           TextColor="White" />
+
+                    <HorizontalStackLayout Spacing="10">
+                        <Border Stroke="#2F2F2F"
+                                StrokeThickness="1.2"
+                                BackgroundColor="Transparent"
+                                StrokeShape="RoundRectangle 3"
+                                WidthRequest="42"
+                                HeightRequest="28"
+                                Padding="0"
+                                VerticalOptions="Center">
+                            <Grid>
+                                <Image Source="mail.png"
+                                        WidthRequest="42"
+                                        HeightRequest="42"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center"
+                                        Aspect="AspectFit" />
+                            </Grid>
+                        </Border>
+
+                        <Label x:Name="UserEmailLabel"
+                                Text="Xinpeng.Xu@uon.edu.au"
+                                VerticalOptions="Center"
+                                FontSize="16"
+                                FontAttributes="Bold"
+                                TextColor="#D9D2DD" />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Classes Summary -->
+            <Border BackgroundColor="#0D0D12"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 22"
+                    Padding="20,18">
+                <HorizontalStackLayout Spacing="20">
+
+                    <!-- Gradient Number Card -->
+                    <Border StrokeThickness="0"
+                            StrokeShape="RoundRectangle 22"
+                            WidthRequest="92"
+                            HeightRequest="92"
+                            Padding="0">
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#4A8CFF" Offset="0.0" />
+                                <GradientStop Color="#9B5CFF" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+
+                        <Label x:Name="ClassesCountLabel"
+                               Text="8"
+                               TextColor="White"
+                               FontSize="42"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+                    </Border>
+
+                    <VerticalStackLayout VerticalOptions="Center" Spacing="2">
+                        <Label Text="Classes"
+                               TextColor="White"
+                               FontSize="30"
+                               FontAttributes="Bold" />
+                        <Label Text="remaining this week"
+                               TextColor="#8E8E93"
+                               FontSize="18" />
+                    </VerticalStackLayout>
+
+                </HorizontalStackLayout>
+            </Border>
+
+            <!-- Section Title -->
+            <VerticalStackLayout Spacing="6">
+                <Label Text="Upcoming Events"
+                       TextColor="White"
+                       FontSize="22"
+                       FontAttributes="Bold" />
+                <Label Text="Today"
+                       TextColor="#7C7C84"
+                       FontSize="14"
+                       FontAttributes="Bold" />
+            </VerticalStackLayout>
+
+            <!-- Classes -->
+            <CollectionView x:Name="ClassesListView"
+                            SelectionMode="None">
+                <CollectionView.EmptyView>
+                    <Grid Padding="0,30,0,0">
+                        <Label Text="No classes for today"
+                               TextColor="#57575F"
+                               HorizontalOptions="Center" />
+                    </Grid>
+                </CollectionView.EmptyView>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BackgroundColor="#111217"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 18"
+                                Margin="0,0,0,18"
+                                Padding="0">
+
+                            <Grid ColumnDefinitions="98,4,*"
+                                  Padding="0">
+
+                                <!-- Time -->
+                                <VerticalStackLayout Grid.Column="0"
+                                                     Padding="18,18,14,18"
+                                                     Spacing="-2"
+                                                     VerticalOptions="Center">
+                                    <Label Text="{Binding StartTime}"
+                                           TextColor="{Binding AccentColor}"
+                                           FontSize="20"
+                                           FontAttributes="Bold" />
+                                    <Label Text="{Binding EndTime}"
+                                           TextColor="#D5D5DB"
+                                           FontSize="14"
+                                           FontAttributes="Bold" />
+                                </VerticalStackLayout>
+
+                                <!-- Accent line -->
+                                <BoxView Grid.Column="1"
+                                         Color="{Binding AccentColor}"
+                                         Margin="0,0,0,0" />
+
+                                <!-- Content -->
+                                <VerticalStackLayout Grid.Column="2"
+                                                     Padding="18,18,18,18"
+                                                     Spacing="10"
+                                                     VerticalOptions="Center">
+                                    <Label Text="{Binding CourseName}"
+                                           TextColor="White"
+                                           FontSize="17"
+                                           FontAttributes="Bold"
+                                           LineBreakMode="TailTruncation" />
+
+                                    <Border BackgroundColor="#1C2B32"
+                                            StrokeThickness="0"
+                                            StrokeShape="RoundRectangle 6"
+                                            HorizontalOptions="Start"
+                                            Padding="10,4">
+                                        <Label Text="{Binding ClassType}"
+                                               TextColor="{Binding AccentColor}"
+                                               FontSize="11"
+                                               FontAttributes="Bold" />
+                                    </Border>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
