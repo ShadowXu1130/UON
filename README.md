@@ -1,64 +1,76 @@
 # UON Access
 
-**UON Access** is a mobile application developed with **.NET MAUI** specifically for **University of Newcastle (UON)** students at the **PSB Academy** campus in Singapore. The app serves as a centralized hub to consolidate fragmented campus services into a single, mobile-first interface.
+**UON Access** is a professional native productivity solution developed with **.NET MAUI** for **University of Newcastle (UON)** students at the **PSB Academy** campus in Singapore. The app transforms the fragmented "7-step PDF process" of checking schedules into a seamless, one-click digital experience.
 
-## 🚀 Key Features
+## 📱 Native Features (Teacher Requirements)
 
-* **Secure Microsoft Authentication**: Integrated with **Microsoft Entra ID (MSAL)**, allowing students to sign in securely using their official university credentials.
+To meet the core project requirements, UON Access implements two key native hardware and ecosystem integrations:
+
+1.  **Secure Microsoft Authentication (Identity Integration)**: 
+    * Integrated with the **Microsoft Identity Platform (MSAL.NET)**.
+    * Allows students to sign in securely using their official university **school accounts**.
+    * Utilizes native browser brokering for a trusted and secure identity verification process.
+
+2.  **Haptic Feedback & Native Vibration (Hardware Integration)**:
+    * Implemented **Native Haptic Feedback** during the Log Out process.
+    * When a user clicks "Log Out," the device triggers a physical vibration (Click type) to provide tactile confirmation of the action.
+    * Enhances the "Native App" feel by providing immediate sensory feedback for critical user actions.
+
+## 🚀 Key Capabilities
+
 * **Dynamic Timetable Engine**: 
-    * A custom-mapped grid system that renders a full **15-week academic calendar**.
-    * Automatically calculates class positions and durations using a specialized coordinate algorithm.
-    * Includes coverage for public holidays and examination periods.
-* **Personalized Dashboard**: Features contextual greetings (Morning/Afternoon/Evening) and real-time tracking of remaining classes for the week.
-* **Secure Navigation Flow**: Utilizes **MAUI Shell** absolute routing (`//`) to reset navigation stacks upon login/logout, preventing unauthorized "back-button" access to sensitive data.
+    * A custom-mapped grid system rendering a full **15-week academic calendar**.
+    * Uses **DateTime math** to programmatically calculate class positions and durations for a perfect visual layout.
+* **Personalized Dashboard**: 
+    * Features a **Progress Manager** that tracks remaining classes for the week.
+    * Includes a high-contrast **"True Black" theme** and color-coded modules for rapid visual scanning.
+* **Secure Navigation Flow**: 
+    * Utilizes **MAUI Shell** absolute routing (`//`) to reset navigation stacks, ensuring sensitive data is inaccessible after logout.
 
 ## 🛠 Tech Stack
 
 * **Framework**: .NET MAUI (.NET 10.0)
+* **IDE**: **Visual Studio 2026**
 * **Language**: C#
 * **Architecture**: MVVM (Model-View-ViewModel)
-* **Identity Provider**: Microsoft Authentication Library (MSAL.NET)
-* **UI/UX**: XAML with custom Grid-mapping logic
+* **Libraries**: Microsoft Authentication Library (MSAL.NET), Microsoft.Maui.Devices (Haptics)
 
 ## 📁 Project Structure
 
-* **`/Models`**: Data entities such as `ScheduleItem` and `UserSession`.
+* **`/Models`**: Data entities such as `ScheduleItem` and `ClassModel`.
 * **`/Services`**: 
-    * `AuthService.cs`: Manages MSAL authentication logic.
-    * `TimetableService.cs`: Contains the 15-week academic dataset and retrieval logic.
-* **`/Views`**: XAML pages including `LoginPage`, `HomePage`, and `TimetablePage`.
-* **`/Resources`**: Application branding, including the custom **UON Access** icon and splash screen.
-* **`AppShell.xaml`**: Defines the visual hierarchy and secure routing of the application.
+    * `AuthService.cs`: Manages MSAL authentication and secure token handling.
+    * `TimetableService.cs`: Contains the core logic for processing schedule data.
+* **`/Views`**: Native UI pages (LoginPage, HomePage, SettingsPage, etc.).
+* **`/ViewModels`**: Logic layer connecting Data Models to XAML Views.
 
 ## ⚙️ Getting Started
 
 ### Prerequisites
-* Visual Studio 2022 with the **.NET MAUI development** workload installed.
+* **Visual Studio 2026** with the **.NET MAUI development** workload.
 * .NET 10.0 SDK.
 
-### Installation
+### Installation & Run
 1.  **Clone the repository**:
     ```bash
     git clone [https://github.com/ShadowXu1130/UON.git](https://github.com/ShadowXu1130/UON.git)
     ```
-2.  **Restore dependencies**:
-    ```bash
-    dotnet restore
-    ```
-3.  **Run the application**:
-    Select your target platform (Android, iOS, or Windows) in Visual Studio and press **F5**.
+2.  **Open in VS 2026**: Open `UON.sln`.
+3.  **Deploy**: Select **Windows Machine** (for desktop demo) or a **Physical Android/iOS Device** (to experience Haptic Feedback). Press **F5**.
 
-## 📈 Current Status
+## 📈 Final Project Status
 
-Development is **ahead of schedule**. Current milestones reached:
-- [x] Core MVVM Architecture setup.
-- [x] MSAL Integration & Secure Session Management.
-- [x] 15-Week Dynamic Timetable Engine implementation.
-- [x] Personalized UI/UX logic.
-- [ ] Live Data API Integration (Upcoming).
+All project milestones have been successfully completed:
+- [x] Core Architecture & Clean Code Structure.
+- [x] **Native Feature 1**: MSAL Secure Login Integration.
+- [x] **Native Feature 2**: Haptic Feedback/Vibration on Logout.
+- [x] Dynamic 15-Week Timetable Grid Logic.
+- [x] "True Black" High-Contrast UI Design.
+- [x] Final Deployment Stability Testing (Windows/Android).
 
 ---
 
 **Developer:** Xu Xinpeng  
 **Student ID:** C3509979  
-**Institution:** University of Newcastle (UON) / PSB Academy
+**Institution:** University of Newcastle (UON) / PSB Academy  
+**Date:** April 4, 2026
