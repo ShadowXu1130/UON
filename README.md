@@ -32,7 +32,7 @@ To meet the core project requirements, UON Access implements two key native hard
 * **Framework**: .NET MAUI (.NET 10.0)
 * **IDE**: **Visual Studio 2026**
 * **Language**: C#
-* **Architecture**: MVVM (Model-View-ViewModel)
+* **Architecture**: **Data-Driven Code-Behind** (Ensuring high performance and direct hardware access)
 * **Libraries**: Microsoft Authentication Library (MSAL.NET), Microsoft.Maui.Devices (Haptics)
 
 ## 📁 Project Structure
@@ -41,8 +41,8 @@ To meet the core project requirements, UON Access implements two key native hard
 * **`/Services`**: 
     * `AuthService.cs`: Manages MSAL authentication and secure token handling.
     * `TimetableService.cs`: Contains the core logic for processing schedule data.
-* **`/Views`**: Native UI pages (LoginPage, HomePage, SettingsPage, etc.).
-* **`/ViewModels`**: Logic layer connecting Data Models to XAML Views.
+* **`/Views`**: **Core Logic & UI Layer**. XAML pages combined with C# logic (Code-Behind) to handle user interactions and hardware feedback.
+* **`/Resources`**: Application branding, icons, and custom splash screens.
 
 ## ⚙️ Getting Started
 
@@ -61,7 +61,7 @@ To meet the core project requirements, UON Access implements two key native hard
 ## 📈 Final Project Status
 
 All project milestones have been successfully completed:
-- [x] Core Architecture & Clean Code Structure.
+- [x] Optimized Code-Behind Architecture for direct hardware control.
 - [x] **Native Feature 1**: MSAL Secure Login Integration.
 - [x] **Native Feature 2**: Haptic Feedback/Vibration on Logout.
 - [x] Dynamic 15-Week Timetable Grid Logic.
