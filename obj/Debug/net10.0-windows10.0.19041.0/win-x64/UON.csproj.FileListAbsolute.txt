@@ -528,3 +528,4 @@ D:\Mobile application\UON\UON\obj\Debug\net10.0-windows10.0.19041.0\win-x64\pri.
 D:\Mobile application\UON\UON\obj\Debug\net10.0-windows10.0.19041.0\win-x64\qualifiers.txt
 D:\Mobile application\UON\UON\obj\Debug\net10.0-windows10.0.19041.0\win-x64\qualifiers.txt.intermediate
 D:\Mobile application\UON\UON\obj\Debug\net10.0-windows10.0.19041.0\win-x64\MultipleQualifiersPerDimensionFound.txt
+D:\Mobile application\UON\UON\obj\Debug\net10.0-windows10.0.19041.0\win-x64\UON.sourcelink.json

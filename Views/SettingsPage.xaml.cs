@@ -1,3 +1,5 @@
+using Microsoft.Maui.Devices; // Required for Haptic Feedback
+
 namespace UON.Views;
 
 public partial class SettingsPage : ContentPage
@@ -6,19 +8,33 @@ public partial class SettingsPage : ContentPage
     {
         InitializeComponent();
 
-        // 绑定当前登录的用户信息
+        // Bind current logged-in user information
         UserNameLabel.Text = "Xinpeng Xu";
         UserEmailLabel.Text = "Xinpeng.Xu@psba.edu.sg";
     }
 
+    /// <summary>
+    /// Handles the back navigation to the previous page.
+    /// </summary>
     private async void OnBackTapped(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync(".."); // 返回上一页
+        await Shell.Current.GoToAsync("..");
     }
 
+    /// <summary>
+    /// Handles the Log Out process with Haptic Feedback and Confirmation.
+    /// </summary>
     private async void OnLogOutClicked(object sender, EventArgs e)
     {
-        bool confirm = await DisplayAlertAsync(
+        // 1. Trigger Native Haptic Feedback (Vibration)
+        // This provides immediate physical confirmation to the user.
+        if (HapticFeedback.Default.IsSupported)
+        {
+            HapticFeedback.Default.Perform(HapticFeedbackType.Click);
+        }
+
+        // 2. Show the Log Out confirmation dialog
+        bool confirm = await DisplayAlert(
             "Log Out",
             "Are you sure you want to log out?",
             "Yes",
@@ -26,11 +42,10 @@ public partial class SettingsPage : ContentPage
 
         if (confirm)
         {
-            // 1. 清空本地存储的登录状态 (如果有)
-            // SecureStorage.RemoveAll();
+            // 3. Clear session or local storage if necessary
+            // Example: SecureStorage.Default.RemoveAll();
 
-            // 2. 跳转回登录页面并清空导航堆栈
-            // "//LoginPage" 路径会强制重置整个 App 的状态
+            // 4. Navigate back to the LoginPage and reset the navigation stack
             await Shell.Current.GoToAsync("//LoginPage");
         }
     }
