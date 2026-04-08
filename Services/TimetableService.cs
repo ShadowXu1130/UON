@@ -1451,8 +1451,11 @@ public class TimetableService
             .ToList();
     }
 
-    public List<ScheduleItem> GetTodayClasses(int weekNumber)
+    // Modified: Removed parameter to automatically fetch the current week
+    public List<ScheduleItem> GetTodayClasses()
     {
+        int currentWeek = GetCurrentWeekNumber(); // Automatically get the current week number
+
         string today = DateTime.Now.DayOfWeek switch
         {
             DayOfWeek.Monday => "Monday",
@@ -1466,13 +1469,16 @@ public class TimetableService
         };
 
         return _allSchedules
-            .Where(x => x.WeekNumber == weekNumber && x.Day == today)
+            .Where(x => x.WeekNumber == currentWeek && x.Day == today)
             .OrderBy(x => DateTime.Parse(x.StartTime))
             .ToList();
     }
 
-    public int GetRemainingClassesThisWeek(int weekNumber)
+    // Modified: Removed parameter to automatically fetch the current week
+    public int GetRemainingClassesThisWeek()
     {
+        int currentWeek = GetCurrentWeekNumber(); // Automatically get the current week number
+
         string today = DateTime.Now.DayOfWeek switch
         {
             DayOfWeek.Monday => "Monday",
@@ -1488,7 +1494,7 @@ public class TimetableService
         int todayOrder = GetDayOrder(today);
 
         return _allSchedules.Count(x =>
-            x.WeekNumber == weekNumber &&
+            x.WeekNumber == currentWeek &&
             GetDayOrder(x.Day) >= todayOrder);
     }
 
@@ -1506,4 +1512,23 @@ public class TimetableService
             _ => 99
         };
     }
+
+    // Added: Dynamically calculate the current week number based on the semester start date
+    public int GetCurrentWeekNumber()
+    {
+        // Set the Monday of Week 1 (Jan 19, 2026, consistent with TimetablePage)
+        DateTime semesterStartDate = new DateTime(2026, 1, 19);
+
+        // Calculate the total days elapsed since the start of the semester
+        TimeSpan timeSinceStart = DateTime.Now.Date - semesterStartDate.Date;
+
+        // Divide by 7 (round down) and add 1 to get the current week number
+        int currentWeek = (int)(timeSinceStart.TotalDays / 7) + 1;
+
+        // Clamp the week number between 1 and 15 to prevent out-of-bounds errors during holidays
+        return Math.Clamp(currentWeek, 1, 15);
+    }
+
+
 }
+

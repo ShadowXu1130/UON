@@ -38,7 +38,7 @@
                 TextColor="White"
                 FontSize="16"
                 Clicked="OnLoginButtonClicked" />
-        <Label Text="Only @psba.edu.sg email addresses are permitted" 
+        <Label Text="Only student and teacher in University of newcastle are permitted" 
                FontSize="11"
                TextColor="#666666" 
                HorizontalOptions="Center" 

@@ -1,13 +1,14 @@
 using System.Globalization;
 using UON.Services;
 
-
 namespace UON.Views;
 
 public partial class HomePage : ContentPage
 {
     private readonly TimetableService _timetableService;
-    private const int CurrentWeekNumber = 7;
+
+    // Note: The hardcoded 'CurrentWeekNumber = 7' has been completely removed 
+    // to allow dynamic week calculation based on the current date.
 
     public HomePage()
     {
@@ -33,12 +34,15 @@ public partial class HomePage : ContentPage
         DateLabel.Text = $"Today is {DateTime.Now.ToString("dddd, MMM d", culture)}";
 
         UserEmailLabel.Text = "Xinpeng.Xu@uon.edu.au";
-        ClassesCountLabel.Text = _timetableService.GetRemainingClassesThisWeek(CurrentWeekNumber).ToString();
+
+        // Modified: Fetches the remaining classes dynamically without hardcoded parameters
+        ClassesCountLabel.Text = _timetableService.GetRemainingClassesThisWeek().ToString();
     }
 
     private void LoadClasses()
     {
-        var todayClasses = _timetableService.GetTodayClasses(CurrentWeekNumber);
+        // Modified: Fetches today's classes dynamically based on the calculated current week
+        var todayClasses = _timetableService.GetTodayClasses();
 
         var uiItems = todayClasses.Select(c => new HomeClassItem
         {
