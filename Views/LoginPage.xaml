@@ -38,6 +38,18 @@
                 TextColor="White"
                 FontSize="16"
                 Clicked="OnLoginButtonClicked" />
+
+        <Button Text="Skip Login (Test Mode Only)" 
+                BackgroundColor="#1A1A1A"
+                BorderColor="#333333"
+                BorderWidth="1"
+                CornerRadius="8"
+                WidthRequest="300" 
+                HeightRequest="40"
+                TextColor="#888888"
+                FontSize="14"
+                Clicked="OnTestModeClicked" />
+
         <Label Text="Only student and teacher in University of newcastle are permitted" 
                FontSize="11"
                TextColor="#666666" 
