@@ -17,9 +17,5 @@ public partial class AppShell : Shell
         // Registers pages that are NOT part of the primary visual hierarchy (like tabs or flyouts)
         // so they can be navigated to programmatically using Shell.Current.GoToAsync().
         Routing.RegisterRoute("SettingsPage", typeof(Views.SettingsPage));
-
-        // Note: If you implement the ScannerPage for the QR code feature later, 
-        // you MUST register it here as well, like this:
-        // Routing.RegisterRoute("ScannerPage", typeof(Views.ScannerPage));
     }
 }
