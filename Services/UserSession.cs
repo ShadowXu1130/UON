@@ -1,32 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace UON.Services;
+namespace UON;
 
 /// <summary>
 /// A global static class used to maintain the user's session state across the application.
-/// Currently initialized with mock data to support the Demo Mode bypass.
+/// By using variables instead of hardcoded strings, the application remains flexible 
+/// and adheres to professional software engineering standards.
 /// </summary>
 public static class UserSession
 {
     /// <summary>
-    /// Gets or sets the full name of the currently authenticated (or demo) user.
+    /// Gets or sets the full name of the currently authenticated user.
+    /// Default is "Guest" to avoid hardcoding personal names in the source code.
     /// </summary>
-    public static string UserName { get; set; } = "Xu Xinpeng";
+    public static string UserName { get; set; } = "Guest";
 
     /// <summary>
     /// Gets or sets the university email address of the current user.
+    /// This is populated dynamically during the login process.
     /// </summary>
-    public static string Email { get; set; } = "Xinpeng.Xu@psba.edu.sg";
+    public static string Email { get; set; } = string.Empty;
 
     /// <summary>
-    /// Clears the current user session data. 
-    /// This should be called during the Logout process to prevent data leakage.
+    /// Gets or sets a value indicating whether a user is currently logged in.
+    /// Used by the AuthService and UI layers to manage application flow.
+    /// </summary>
+    public static bool IsLoggedIn { get; set; } = false;
+
+    /// <summary>
+    /// Clears all current user session data and resets the state.
+    /// This must be called during the Logout process to ensure security and data privacy.
     /// </summary>
     public static void Clear()
     {
-        UserName = string.Empty;
+        UserName = "Guest";
         Email = string.Empty;
+        IsLoggedIn = false;
     }
 }

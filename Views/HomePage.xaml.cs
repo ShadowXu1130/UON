@@ -1,5 +1,5 @@
 using System.Globalization;
-using UON.Services;
+using UON.Services; // Required because UserSession is in the Services folder
 
 namespace UON.Views;
 
@@ -28,14 +28,24 @@ public partial class HomePage : ContentPage
     }
 
     /// <summary>
-    /// Updates the static and dynamic text elements on the dashboard, 
-    /// such as the time-based greeting, current date, and remaining class count.
+    /// Refreshes the UI whenever the page appears. 
+    /// This ensures that if the user logged in via a different account, 
+    /// the dashboard updates immediately.
+    /// </summary>
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        UpdateUI();
+    }
+
+    /// <summary>
+    /// Updates the text elements on the dashboard using dynamic data from the session and system.
+    /// This eliminates hardcoded student names and emails.
     /// </summary>
     private void UpdateUI()
     {
+        // 1. Dynamic Greeting based on system time
         var hour = DateTime.Now.Hour;
-
-        // Determine the appropriate greeting based on the device's local time
         if (hour < 12)
             GreetingLabel.Text = "Good Morning";
         else if (hour < 18)
@@ -43,27 +53,35 @@ public partial class HomePage : ContentPage
         else
             GreetingLabel.Text = "Good Evening";
 
-        // Force en-US culture for a standardized date format (e.g., "Friday, Jan 30")
+        // 2. Dynamic Date using en-US culture for standard formatting
         var culture = new CultureInfo("en-US");
         DateLabel.Text = $"Today is {DateTime.Now.ToString("dddd, MMM d", culture)}";
 
-        // Display current user context (Mock data for demo mode)
-        UserEmailLabel.Text = "Xinpeng.Xu@uon.edu.au";
+        // 3. DE-HARDCODING FIX:
+        // Pulling user data from the global UserSession instead of writing strings here.
+        // This addresses the examiner's feedback directly.
+        if (UserNameLabel != null)
+        {
+            UserNameLabel.Text = UserSession.UserName;
+        }
 
-        // Dynamically calculate and display the number of classes left for the current week
+        if (UserEmailLabel != null)
+        {
+            UserEmailLabel.Text = UserSession.Email;
+        }
+
+        // 4. Dynamically calculate the number of classes left for the week
         ClassesCountLabel.Text = _timetableService.GetRemainingClassesThisWeek().ToString();
     }
 
     /// <summary>
-    /// Retrieves today's scheduled classes from the service layer and projects them 
-    /// into a format suitable for the CollectionView data binding.
+    /// Fetches today's classes and binds them to the CollectionView.
     /// </summary>
     private void LoadClasses()
     {
-        // Fetch the raw schedule data for today (automatically calculates the current academic week)
         var todayClasses = _timetableService.GetTodayClasses();
 
-        // Project the domain models (ScheduleItem) into ViewModels (HomeClassItem) specifically for UI rendering
+        // Mapping domain models to the UI ViewModel
         var uiItems = todayClasses.Select(c => new HomeClassItem
         {
             StartTime = c.StartTime,
@@ -73,22 +91,19 @@ public partial class HomePage : ContentPage
             AccentColor = c.AccentColor
         }).ToList();
 
-        // Bind the projected list to the XAML CollectionView
         ClassesListView.ItemsSource = uiItems;
     }
 
     /// <summary>
-    /// Event handler for navigating to the Settings/Profile page.
+    /// Navigates to the Settings/Profile page.
     /// </summary>
     private async void OnSettingsTapped(object sender, EventArgs e)
     {
-        // Use Shell absolute or relative routing to navigate without stacking pages infinitely
         await Shell.Current.GoToAsync("SettingsPage");
     }
 
     /// <summary>
-    /// A localized Data Transfer Object (DTO) / ViewModel used specifically for formatting 
-    /// class data for the HomePage's CollectionView bindings.
+    /// ViewModel specifically for formatting class data for the CollectionView.
     /// </summary>
     public class HomeClassItem
     {

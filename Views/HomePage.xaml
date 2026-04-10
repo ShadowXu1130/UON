@@ -8,18 +8,17 @@
     <ScrollView>
         <VerticalStackLayout Padding="28,36,28,28" Spacing="22">
 
-            <!-- Header -->
             <Grid ColumnDefinitions="*,Auto" VerticalOptions="Start">
                 <VerticalStackLayout Spacing="2">
                     <Label x:Name="GreetingLabel"
-                           Text="Good Afternoon"
+                           Text="Welcome"
                            FontSize="44"
                            FontAttributes="Bold"
                            TextColor="White"
                            LineBreakMode="NoWrap" />
 
                     <Label x:Name="DateLabel"
-                           Text="Today is Friday, Jan 30"
+                           Text=""
                            FontSize="16"
                            FontAttributes="Bold"
                            TextColor="#8D8D95" />
@@ -37,7 +36,6 @@
                 </Label>
             </Grid>
 
-            <!-- Profile Card -->
             <Border BackgroundColor="#7A8898"
                     StrokeThickness="0"
                     StrokeShape="RoundRectangle 28"
@@ -48,7 +46,8 @@
                            FontAttributes="Bold"
                            TextColor="White" />
 
-                    <Label Text="Xinpeng Xu"
+                    <Label x:Name="UserNameLabel"
+                           Text="Loading..."
                            FontSize="42"
                            FontAttributes="Bold"
                            TextColor="White" />
@@ -64,32 +63,30 @@
                                 VerticalOptions="Center">
                             <Grid>
                                 <Image Source="mail.png"
-                                        WidthRequest="42"
-                                        HeightRequest="42"
-                                        HorizontalOptions="Center"
-                                        VerticalOptions="Center"
-                                        Aspect="AspectFit" />
+                                       WidthRequest="42"
+                                       HeightRequest="42"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       Aspect="AspectFit" />
                             </Grid>
                         </Border>
 
                         <Label x:Name="UserEmailLabel"
-                                Text="Xinpeng.Xu@uon.edu.au"
-                                VerticalOptions="Center"
-                                FontSize="16"
-                                FontAttributes="Bold"
-                                TextColor="#D9D2DD" />
+                               Text=""
+                               VerticalOptions="Center"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="#D9D2DD" />
                     </HorizontalStackLayout>
                 </VerticalStackLayout>
             </Border>
 
-            <!-- Classes Summary -->
             <Border BackgroundColor="#0D0D12"
                     StrokeThickness="0"
                     StrokeShape="RoundRectangle 22"
                     Padding="20,18">
                 <HorizontalStackLayout Spacing="20">
 
-                    <!-- Gradient Number Card -->
                     <Border StrokeThickness="0"
                             StrokeShape="RoundRectangle 22"
                             WidthRequest="92"
@@ -103,7 +100,7 @@
                         </Border.Background>
 
                         <Label x:Name="ClassesCountLabel"
-                               Text="8"
+                               Text="-"
                                TextColor="White"
                                FontSize="42"
                                FontAttributes="Bold"
@@ -124,7 +121,6 @@
                 </HorizontalStackLayout>
             </Border>
 
-            <!-- Section Title -->
             <VerticalStackLayout Spacing="6">
                 <Label Text="Upcoming Events"
                        TextColor="White"
@@ -136,7 +132,6 @@
                        FontAttributes="Bold" />
             </VerticalStackLayout>
 
-            <!-- Classes -->
             <CollectionView x:Name="ClassesListView"
                             SelectionMode="None">
                 <CollectionView.EmptyView>
@@ -158,7 +153,6 @@
                             <Grid ColumnDefinitions="98,4,*"
                                   Padding="0">
 
-                                <!-- Time -->
                                 <VerticalStackLayout Grid.Column="0"
                                                      Padding="18,18,14,18"
                                                      Spacing="-2"
@@ -173,12 +167,10 @@
                                            FontAttributes="Bold" />
                                 </VerticalStackLayout>
 
-                                <!-- Accent line -->
                                 <BoxView Grid.Column="1"
                                          Color="{Binding AccentColor}"
                                          Margin="0,0,0,0" />
 
-                                <!-- Content -->
                                 <VerticalStackLayout Grid.Column="2"
                                                      Padding="18,18,18,18"
                                                      Spacing="10"
