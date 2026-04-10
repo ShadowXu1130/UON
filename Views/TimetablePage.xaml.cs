@@ -56,6 +56,16 @@ public partial class TimetablePage : ContentPage
     }
 
     /// <summary>
+    /// FIX: Handles the tap event on the Week selector border.
+    /// Programmatically triggers the Picker focus to resolve UI interaction dead zones.
+    /// </summary>
+    private void OnWeekDisplayTapped(object sender, EventArgs e)
+    {
+        // 强制弹出底下的 Picker，确保点击文字正中心也能响应
+        WeekPicker.Focus();
+    }
+
+    /// <summary>
     /// Orchestrates the UI refresh process when a user navigates to a different week.
     /// </summary>
     private void UpdateWeekDisplay()
