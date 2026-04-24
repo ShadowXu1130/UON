@@ -458,6 +458,101 @@ public class TimetableService
             Location = "Stem Wing",
             AccentColor = "#B7E0B7"
         },
+
+        // Week 5
+        new ScheduleItem
+        {
+            WeekNumber = 5,
+            Day = "Monday",
+            CourseCode = "PH0001",
+            CourseName = "Chinese New Year Break",
+            ClassType = "Holiday",
+            StartTime = "08:00 AM",
+            EndTime = "06:00 PM",
+            Lecturer = "N/A",
+            Location = "Holiday",
+            AccentColor = "#F3EB00"
+        },
+
+        new ScheduleItem
+        {
+            WeekNumber = 5,
+            Day = "Tuesday",
+            CourseCode = "PH0001",
+            CourseName = "Chinese New Year Break",
+            ClassType = "Holiday",
+            StartTime = "08:00 AM",
+            EndTime = "06:00 PM",
+            Lecturer = "N/A",
+            Location = "Holiday",
+            AccentColor = "#F3EB00"
+        },
+
+        new ScheduleItem
+        {
+            WeekNumber = 5,
+            Day = "Wednesday",
+            CourseCode = "PH0001",
+            CourseName = "Chinese New Year Break",
+            ClassType = "Holiday",
+            StartTime = "08:00 AM",
+            EndTime = "06:00 PM",
+            Lecturer = "N/A",
+            Location = "Holiday",
+            AccentColor = "#F3EB00"
+        },
+        new ScheduleItem
+        {
+            WeekNumber = 5,
+            Day = "Thursday",
+            CourseCode = "PH0001",
+            CourseName = "Chinese New Year Break",
+            ClassType = "Holiday",
+            StartTime = "08:00 AM",
+            EndTime = "06:00 PM",
+            Lecturer = "N/A",
+            Location = "Holiday",
+            AccentColor = "#F3EB00"
+        },
+        new ScheduleItem
+        {
+            WeekNumber = 5,
+            Day = "Friday",
+            CourseCode = "PH0001",
+            CourseName = "Chinese New Year Break",
+            ClassType = "Holiday",
+            StartTime = "08:00 AM",
+            EndTime = "06:00 PM",
+            Lecturer = "N/A",
+            Location = "Holiday",
+            AccentColor = "#F3EB00"
+        },
+        new ScheduleItem
+        {
+            WeekNumber = 5,
+            Day = "Saturday",
+            CourseCode = "PH0001",
+            CourseName = "Chinese New Year Break",
+            ClassType = "Holiday",
+            StartTime = "08:00 AM",
+            EndTime = "06:00 PM",
+            Lecturer = "N/A",
+            Location = "Holiday",
+            AccentColor = "#F3EB00"
+        },
+        new ScheduleItem
+        {
+            WeekNumber = 5,
+            Day = "Sunday",
+            CourseCode = "PH0001",
+            CourseName = "Chinese New Year Break",
+            ClassType = "Holiday",
+            StartTime = "08:00 AM",
+            EndTime = "06:00 PM",
+            Lecturer = "N/A",
+            Location = "Holiday",
+            AccentColor = "#F3EB00"
+        },
         
         // Week 6
         new ScheduleItem
