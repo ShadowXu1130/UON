@@ -21,9 +21,6 @@ public partial class TimetablePage : ContentPage
     // Tracks the currently selected week index (0-based).
     private int _currentWeekIndex;
 
-    /// <summary>
-    /// Initializes the TimetablePage and bootstraps the initial schedule state.
-    /// </summary>
     public TimetablePage()
     {
         InitializeComponent();
@@ -31,10 +28,12 @@ public partial class TimetablePage : ContentPage
         // 1. Generate the academic calendar for the semester.
         SetupWeeks();
 
-        // 2. Automatically determine which week to display based on the current system date.
-        _currentWeekIndex = CalculateInitialWeekIndex();
+        // NATIVE FEATURE: Data Retrieval Logic
+        // Attempt to read the saved week from the device's hardware storage.
+        // If no saved data exists, it defaults to the automated calculation (CalculateInitialWeekIndex).
+        _currentWeekIndex = Microsoft.Maui.Storage.Preferences.Default.Get("LastSelectedWeek", CalculateInitialWeekIndex());
 
-        // 3. Synchronize the UI Picker and render the grid.
+        // 3. Synchronize the UI Picker and render the grid based on the stored/calculated index.
         SetupPicker();
         UpdateWeekDisplay();
     }
@@ -281,6 +280,12 @@ public partial class TimetablePage : ContentPage
         if (WeekPicker.SelectedIndex >= 0)
         {
             _currentWeekIndex = WeekPicker.SelectedIndex;
+
+            // NATIVE FEATURE: Hardware Storage Integration
+            // Persist the user's current week selection to the operating system's local settings.
+            // This ensures the application state remains consistent across different user sessions and application restarts.
+            Microsoft.Maui.Storage.Preferences.Default.Set("LastSelectedWeek", _currentWeekIndex);
+
             UpdateWeekDisplay();
         }
     }
