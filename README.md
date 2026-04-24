@@ -6,12 +6,13 @@
 
 To meet the core project requirements, UON Access implements two key native hardware and ecosystem integrations, fully optimized for cross-platform stability:
 
-1.  **Secure Microsoft Authentication (Identity Integration)**: 
+1. **Secure Microsoft Authentication (Identity Integration)**: 
     * Integrated with the **Microsoft Identity Platform (MSAL.NET)**.
     * Allows students to sign in securely using their official university **school accounts** via native browser brokering.
-2.  **Haptic Feedback & Native Vibration (Hardware Integration)**:
-    * Implemented **Native Haptic Feedback** during the Log Out process to provide immediate sensory confirmation.
-    * **Cross-Platform Graceful Degradation:** If the app is tested on a device without a physical vibration motor (e.g., a Windows Desktop PC), the system safely catches the `FeatureNotSupportedException` and displays a native UI alert instead, preventing application crashes.
+2. **Hardware-Level Data Persistence (Storage Integration)**:
+    * Implemented **Native Data Persistence** using the **Preferences API** (`Microsoft.Maui.Storage`).
+    * **OS-Specific Implementation:** Instead of simple memory caching, the app persists user selections (such as the last-viewed academic week) directly into the device's hardware storage. 
+    * **Platform Backends:** Utilizes **Windows Data Protection API (DPAPI)** on desktop and **SharedPreferences/NSUserDefaults** on mobile, ensuring application state is preserved even after a complete process termination or system restart.
 
 ## 🧪 Examiner Guide: Test Mode (Demo Bypass)
 
@@ -38,7 +39,7 @@ To ensure examiners can fully grade and experience the application's core featur
 * **IDE**: **Visual Studio 2026**
 * **Language**: C#
 * **Architecture**: **Data-Driven Code-Behind** with robust State Management (`UserSession`)
-* **Libraries**: Microsoft Authentication Library (MSAL.NET), Microsoft.Maui.Devices (Haptics API)
+* **Libraries**: Microsoft Authentication Library (MSAL.NET), Microsoft.Maui.Storage (Preferences API)
 
 ## 📁 Project Structure
 
@@ -56,21 +57,21 @@ To ensure examiners can fully grade and experience the application's core featur
 * .NET 10.0 SDK.
 
 ### Installation & Run
-1.  **Clone the repository**:
+1. **Clone the repository**:
     ```bash
     git clone [https://github.com/ShadowXu1130/UON.git](https://github.com/ShadowXu1130/UON.git)
     ```
-2.  **Open in VS 2026**: Open `UON.sln`.
-3.  **Deploy**: Select **Windows Machine** (for desktop demo) or a **Physical Android/iOS Device** (to experience native Haptic Feedback). Press **F5**.
-4.  **Log In**: Click **"Skip Login (Test Mode)"** to bypass University IT restrictions and access the dashboard.
+2. **Open in VS 2026**: Open `UON.sln`.
+3. **Deploy**: Select **Windows Machine** (for desktop demo) or a **Physical Android/iOS Device**. Press **F5**.
+4. **Log In**: Click **"Skip Login (Test Mode)"** to bypass University IT restrictions and access the dashboard.
 
 ## 📈 Final Project Status
 
 All project milestones have been successfully completed:
 - [x] Optimized Code-Behind Architecture for direct hardware control.
 - [x] **Native Feature 1**: MSAL Secure Login Integration.
-- [x] **Native Feature 2**: Haptic Feedback/Vibration on Logout.
-- [x] **Architecture**: Implementation of Test Mode and Hardware Fallback handling.
+- [x] **Native Feature 2**: Hardware-Level Data Persistence (Storage).
+- [x] **Architecture**: Implementation of Test Mode and State Persistence.
 - [x] Dynamic 15-Week Timetable Grid Logic.
 - [x] "True Black" High-Contrast UI Design.
 - [x] Comprehensive XML Documentation and Git Version Control.
